@@ -1,6 +1,7 @@
 package lt.ltech.numbers.game;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import lt.ltech.numbers.GameException;
@@ -57,7 +58,7 @@ public class GameState {
 
         Round r = new Round();
         this.rounds.add(r);
-        
+
         int playerIndex = this.players.indexOf(player);
         int opponentIndex = playerIndex + 1;
         if (opponentIndex == this.players.size()) {
@@ -101,19 +102,27 @@ public class GameState {
     }
 
     public boolean isGameOver() {
-        boolean gameOver = false;
+        return this.getWinner() != null;
+    }
+
+    public List<Round> getRounds() {
+        return Collections.unmodifiableList(this.rounds);
+    }
+
+    public Player getWinner() {
+        Player winner = null;
         Round lastRound = this.getLastRound();
         if (lastRound == null) {
-            return false;
+            return winner;
         }
         byte correct = GameConfiguration.numberLength();
-        for (Player player : lastRound.getAnswers().keySet()) {
+        for (Player player: lastRound.getAnswers().keySet()) {
             Answer answer = lastRound.getAnswers().get(player);
             if (answer.getCorrect() == correct) {
-                gameOver = true;
+                winner = player;
                 break;
             }
         }
-        return gameOver;
+        return winner;
     }
 }
