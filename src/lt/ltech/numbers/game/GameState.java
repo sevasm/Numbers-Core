@@ -3,6 +3,7 @@ package lt.ltech.numbers.game;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import lt.ltech.numbers.GameException;
 import lt.ltech.numbers.player.Player;
@@ -56,8 +57,22 @@ public class GameState {
         GameStep gs = new GameStep(GameStep.Type.GUESS, player);
         this.checkStep(gs, this.gameStep);
 
-        Round r = new Round();
-        this.rounds.add(r);
+        Round r = this.getLastRound();
+        if (r != null) {
+            Map<Player, Number> guesses = r.getGuesses();
+            if (r.getGuesses().containsKey(player)) {
+                if (this.players.size() == guesses.size()) {
+                    r = new Round();
+                    this.rounds.add(r);
+                } else {
+                    throw new GameException(String.format(
+                            "%s has already made a guess this round", player));
+                }
+            }
+        } else {
+            r = new Round();
+            this.rounds.add(r);
+        }
 
         int playerIndex = this.players.indexOf(player);
         int opponentIndex = playerIndex + 1;
