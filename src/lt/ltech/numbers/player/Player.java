@@ -1,6 +1,7 @@
 package lt.ltech.numbers.player;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import lt.ltech.numbers.game.Number;
 
@@ -19,6 +20,11 @@ public class Player implements Serializable {
     private Long id;
 
     /**
+     * The player's GUID. Used to identify players in other player's phones.
+     */
+    private final UUID guid;
+
+    /**
      * The player's name
      */
     private final String name;
@@ -28,7 +34,8 @@ public class Player implements Serializable {
      */
     private Number number;
 
-    public Player(String name) {
+    public Player(UUID guid, String name) {
+        this.guid = guid;
         this.name = name;
     }
 
@@ -46,6 +53,10 @@ public class Player implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public UUID getGuid() {
+        return guid;
     }
 
     public String getName() {

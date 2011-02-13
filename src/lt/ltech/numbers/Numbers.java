@@ -2,6 +2,7 @@ package lt.ltech.numbers;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import lt.ltech.numbers.game.GameState;
 import lt.ltech.numbers.game.GameStep;
@@ -25,9 +26,9 @@ public class Numbers {
         Numbers n = new Numbers();
         n.gs = new GameState();
 
-        n.humanPlayer = new Player("Human Player");
+        n.humanPlayer = new Player(UUID.randomUUID(), "Human Player");
         n.humanPlayer.setId(1l);
-        n.computerPlayer = new Player("Computer Player");
+        n.computerPlayer = new Player(UUID.randomUUID(), "Computer Player");
         n.computerPlayer.setId(2l);
         n.artificialPlayers = new HashMap<Player, ArtificialPlayer>();
         n.artificialPlayers.put(n.humanPlayer, new ConsolePlayer());

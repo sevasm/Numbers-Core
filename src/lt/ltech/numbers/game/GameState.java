@@ -28,6 +28,7 @@ public class GameState {
         if (this.gameStep.type() == GameStep.Type.INITIAL) {
             this.gameStep = new GameStep(GameStep.Type.SET_NUMBER, player);
         }
+        player.setIndex((byte) this.players.size());
         this.players.add(player);
     }
 
