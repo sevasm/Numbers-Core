@@ -1,11 +1,13 @@
 package lt.ltech.numbers.game;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
 import lt.ltech.numbers.GameException;
 
-public class Number {
+@SuppressWarnings("serial")
+public class Number implements Serializable {
     private final List<Byte> number;
 
     public Number(List<Byte> number) throws GameException {
@@ -28,7 +30,7 @@ public class Number {
 
         byte min = GameConfiguration.minNumber();
         byte max = GameConfiguration.maxNumber();
-        for (Byte digit : number) {
+        for (Byte digit: number) {
             if (digit == null) {
                 throw new GameException("Illegal digit - null");
             }

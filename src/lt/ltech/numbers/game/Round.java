@@ -1,5 +1,6 @@
 package lt.ltech.numbers.game;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,7 +8,8 @@ import java.util.Map;
 import lt.ltech.numbers.GameException;
 import lt.ltech.numbers.player.Player;
 
-public class Round {
+@SuppressWarnings("serial")
+public class Round implements Serializable {
     private final Map<Player, Number> guesses;
     private final Map<Player, Answer> answers;
 

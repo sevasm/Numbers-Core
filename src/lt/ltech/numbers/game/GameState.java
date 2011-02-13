@@ -1,5 +1,6 @@
 package lt.ltech.numbers.game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,7 +9,8 @@ import java.util.Map;
 import lt.ltech.numbers.GameException;
 import lt.ltech.numbers.player.Player;
 
-public class GameState {
+@SuppressWarnings("serial")
+public class GameState implements Serializable {
     private List<Round> rounds;
     private GameStep gameStep;
     private List<Player> players;
@@ -119,6 +121,10 @@ public class GameState {
 
     public boolean isGameOver() {
         return this.getWinner() != null;
+    }
+
+    public boolean containsPlayer(Player player) {
+        return this.players.contains(player);
     }
 
     public List<Round> getRounds() {

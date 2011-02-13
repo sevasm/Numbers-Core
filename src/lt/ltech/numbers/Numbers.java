@@ -45,20 +45,20 @@ public class Numbers {
     private void handleGameStep(GameStep step) throws GameException {
         Player p = step.player();
         switch (step.type()) {
-            case SET_NUMBER: {
-                Number n = this.artificialPlayers.get(p).inventNumber();
-                this.gs.setNumber(p, n);
-                this.logger.info(String.format("%s has selected %s", p, n));
-                break;
-            }
-            case GUESS: {
-                Number g = this.artificialPlayers.get(p).makeGuess(this.gs);
-                this.gs.guess(p, g);
-                Round r = this.gs.getLastRound();
-                this.logger.info(String.format("%s guesses %s %s", p, r
-                        .getGuesses().get(p), r.getAnswers().get(p)));
-                break;
-            }
+        case SET_NUMBER: {
+            Number n = this.artificialPlayers.get(p).inventNumber();
+            this.gs.setNumber(p, n);
+            this.logger.info(String.format("%s has selected %s", p, n));
+            break;
+        }
+        case GUESS: {
+            Number g = this.artificialPlayers.get(p).makeGuess(this.gs);
+            this.gs.guess(p, g);
+            Round r = this.gs.getLastRound();
+            this.logger.info(String.format("%s guesses %s %s", p, r
+                    .getGuesses().get(p), r.getAnswers().get(p)));
+            break;
+        }
         }
     }
 }

@@ -1,9 +1,12 @@
 package lt.ltech.numbers.game;
 
+import java.io.Serializable;
+
 import lt.ltech.numbers.player.Player;
 
-public class GameStep {
-    public enum Type {
+@SuppressWarnings("serial")
+public class GameStep implements Serializable {
+    public enum Type implements Serializable {
         INITIAL, SET_NUMBER, GUESS, GAME_OVER
     }
 

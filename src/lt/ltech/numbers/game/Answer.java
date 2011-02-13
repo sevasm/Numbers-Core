@@ -1,6 +1,9 @@
 package lt.ltech.numbers.game;
 
-public class Answer {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Answer implements Serializable {
     private final byte present;
     private final byte correct;
 
