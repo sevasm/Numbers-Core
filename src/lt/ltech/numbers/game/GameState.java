@@ -30,7 +30,7 @@ public class GameState implements Serializable {
         if (this.gameStep.type() == GameStep.Type.INITIAL) {
             this.gameStep = new GameStep(GameStep.Type.SET_NUMBER, player);
         }
-        player.setIndex((byte) this.players.size());
+        player.setIndex((int) this.players.size());
         this.players.add(player);
     }
 
@@ -137,7 +137,7 @@ public class GameState implements Serializable {
         if (lastRound == null) {
             return winner;
         }
-        byte correct = GameConfiguration.numberLength();
+        int correct = GameConfiguration.numberLength();
         for (Player player: lastRound.getAnswers().keySet()) {
             Answer answer = lastRound.getAnswers().get(player);
             if (answer.getCorrect() == correct) {

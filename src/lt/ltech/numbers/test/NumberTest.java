@@ -8,6 +8,7 @@ public class NumberTest extends TestCase {
     static public Test suite() {
         TestSuite suite = new TestSuite();
         suite.addTest(new AnswerTest());
+        suite.addTest(new DefaultPlayerTest());
         return suite;
     }
 }

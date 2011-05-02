@@ -1,15 +1,15 @@
 package lt.ltech.numbers.game;
 
 public class GameConfiguration {
-    public static byte numberLength() {
+    public static int numberLength() {
         return 4;
     }
 
-    public static byte minNumber() {
+    public static int minNumber() {
         return 0;
     }
 
-    public static byte maxNumber() {
+    public static int maxNumber() {
         return 9;
     }
 }

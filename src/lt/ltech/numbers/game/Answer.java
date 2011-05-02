@@ -4,19 +4,19 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Answer implements Serializable {
-    private final byte present;
-    private final byte correct;
+    private final int present;
+    private final int correct;
 
-    private Answer(byte present, byte correct) {
+    private Answer(int present, int correct) {
         this.present = present;
         this.correct = correct;
     }
 
     public static Answer answer(Number number, Number guess) {
-        byte present = 0;
-        byte correct = 0;
+        int present = 0;
+        int correct = 0;
         for (int i = 0; i < number.getNumber().size(); i++) {
-            byte gDigit = guess.getNumber().get(i);
+            int gDigit = guess.getNumber().get(i);
             if (number.getNumber().contains(gDigit)) {
                 present++;
             } else {
@@ -24,7 +24,7 @@ public class Answer implements Serializable {
                 // move on to the next digit
                 continue;
             }
-            byte nDigit = number.getNumber().get(i);
+            int nDigit = number.getNumber().get(i);
             if (gDigit == nDigit) {
                 correct++;
             }
@@ -32,11 +32,11 @@ public class Answer implements Serializable {
         return new Answer(present, correct);
     }
 
-    public byte getPresent() {
+    public int getPresent() {
         return present;
     }
 
-    public byte getCorrect() {
+    public int getCorrect() {
         return correct;
     }
 

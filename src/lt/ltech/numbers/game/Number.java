@@ -8,18 +8,18 @@ import lt.ltech.numbers.GameException;
 
 @SuppressWarnings("serial")
 public class Number implements Serializable {
-    private final List<Byte> number;
+    private final List<Integer> number;
 
-    public Number(List<Byte> number) throws GameException {
+    public Number(List<Integer> number) throws GameException {
         this.validateNumber(number);
         this.number = Collections.unmodifiableList(number);
     }
 
-    public List<Byte> getNumber() {
+    public List<Integer> getNumber() {
         return this.number;
     }
 
-    private void validateNumber(List<Byte> number) throws GameException {
+    private void validateNumber(List<Integer> number) throws GameException {
         int size = number.size();
         int numberLength = GameConfiguration.numberLength();
         if (size != numberLength) {
@@ -28,9 +28,9 @@ public class Number implements Serializable {
                     numberLength));
         }
 
-        byte min = GameConfiguration.minNumber();
-        byte max = GameConfiguration.maxNumber();
-        for (Byte digit: number) {
+        int min = GameConfiguration.minNumber();
+        int max = GameConfiguration.maxNumber();
+        for (Integer digit: number) {
             if (digit == null) {
                 throw new GameException("Illegal digit - null");
             }
@@ -43,7 +43,7 @@ public class Number implements Serializable {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Byte digit: number) {
+        for (Integer digit: number) {
             sb.append(digit.toString());
         }
         return sb.toString();

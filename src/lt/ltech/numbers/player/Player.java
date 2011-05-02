@@ -11,7 +11,7 @@ public class Player implements Serializable {
      * The player's index in a game in progress. For any given game this will be
      * unique for all players in the game
      */
-    private Byte index;
+    private Integer index;
 
     /**
      * The player's ID on a single phone. This should be unique for all players
@@ -39,11 +39,11 @@ public class Player implements Serializable {
         this.name = name;
     }
 
-    public Byte getIndex() {
+    public Integer getIndex() {
         return this.index;
     }
 
-    public void setIndex(Byte index) {
+    public void setIndex(Integer index) {
         this.index = index;
     }
 

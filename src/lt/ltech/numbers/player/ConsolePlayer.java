@@ -34,9 +34,9 @@ public class ConsolePlayer implements ArtificialPlayer {
             br = new BufferedReader(new InputStreamReader(System.in));
             String line = br.readLine();
             String[] splitLine = line.split("");
-            Byte[] guessArray = new Byte[splitLine.length - 1];
+            Integer[] guessArray = new Integer[splitLine.length - 1];
             for (int i = 1; i < splitLine.length; i++) {
-                guessArray[i - 1] = Byte.valueOf(splitLine[i]);
+                guessArray[i - 1] = Integer.valueOf(splitLine[i]);
             }
             guess = new Number(Arrays.asList(guessArray));
         } catch (NumberFormatException e) {
