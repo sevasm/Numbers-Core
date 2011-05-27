@@ -268,7 +268,7 @@ public class DefaultPlayer implements ArtificialPlayer {
             ;
     }
 
-    public boolean consolidatePools() {
+    private boolean consolidatePools() {
         // check if any pools contain known in numbers
         for (int j = 0; j < pools.size(); ++j) {
             Pool<Integer> pool = pools.get(j);
@@ -324,7 +324,7 @@ public class DefaultPlayer implements ArtificialPlayer {
         return false;
     }
 
-    public boolean checkPool(Pool<Integer> pool) {
+    private boolean checkPool(Pool<Integer> pool) {
         // if pool is empty, remove it
         if (pool.getPool().size() == 0) {
             pools.remove(pool);

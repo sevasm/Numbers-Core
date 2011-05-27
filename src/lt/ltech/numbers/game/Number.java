@@ -6,15 +6,32 @@ import java.util.List;
 
 import lt.ltech.numbers.GameException;
 
+/**
+ * A number as understood by the game engine. A number consists of a list of
+ * arbitrary integers, the number and range of which is determined by the
+ * {@link GameConfiguration game configuration}.
+ * @author Sevas
+ * 
+ */
 @SuppressWarnings("serial")
 public class Number implements Serializable {
     private final List<Integer> number;
 
+    /**
+     * Creates a new number that contains the given list of integers.
+     * @param number the list of integers.
+     * @throws GameException if the number cannot be created based on the rules
+     *         of the game.
+     */
     public Number(List<Integer> number) throws GameException {
         this.validateNumber(number);
         this.number = Collections.unmodifiableList(number);
     }
 
+    /**
+     * Returns the integers that comprise this number.
+     * @return the integers that comprise this number..
+     */
     public List<Integer> getNumber() {
         return this.number;
     }

@@ -9,18 +9,32 @@ import java.util.Map;
 import lt.ltech.numbers.GameException;
 import lt.ltech.numbers.player.Player;
 
+/**
+ * This class maintains the state of the game. More specifically it tracks the
+ * players in the game and the rounds played.
+ * @author Severinas Monkevicius
+ */
 @SuppressWarnings("serial")
 public class GameState implements Serializable {
     private List<Round> rounds;
     private GameStep gameStep;
     private List<Player> players;
 
+    /**
+     * Creates a new game state or simply a new game.
+     */
     public GameState() {
         this.players = new ArrayList<Player>();
         this.rounds = new ArrayList<Round>();
         this.gameStep = new GameStep(GameStep.Type.INITIAL);
     }
 
+    /**
+     * Adds a new player to the game. Players can only be added until the last
+     * player already added has picked their number.
+     * @param player the player to add.
+     * @throws GameException if the player canno be added.
+     */
     public void addPlayer(Player player) throws GameException {
         if (this.gameStep.type() == GameStep.Type.GUESS
                 || this.gameStep.type() == GameStep.Type.GAME_OVER) {
@@ -34,6 +48,13 @@ public class GameState implements Serializable {
         this.players.add(player);
     }
 
+    /**
+     * Assigns a number to a player.
+     * @param player the player to whom the number is to be assigned.
+     * @param number the number to assign.
+     * @return the next step in the current game.
+     * @throws GameException if the number cannot be assigned.
+     */
     public GameStep setNumber(Player player, Number number)
             throws GameException {
         GameStep gs = new GameStep(GameStep.Type.SET_NUMBER, player);
@@ -56,6 +77,13 @@ public class GameState implements Serializable {
         return this.gameStep;
     }
 
+    /**
+     * Makes a guess.
+     * @param player the player making the guess.
+     * @param guess the guess to make.
+     * @return the next step in the current game.
+     * @throws GameException if the guess cannot be made.
+     */
     public GameStep guess(Player player, Number guess) throws GameException {
         GameStep gs = new GameStep(GameStep.Type.GUESS, player);
         this.checkStep(gs, this.gameStep);
@@ -101,10 +129,19 @@ public class GameState implements Serializable {
         return this.gameStep;
     }
 
+    /**
+     * Returns the current step in this game.
+     * @return the current step in this game.
+     */
     public GameStep getGameStep() {
         return this.gameStep;
     }
 
+    /**
+     * Returns the last round in the current game.
+     * @return the last round in the current game or <code>null</code> if no
+     *         rounds have taken place.
+     */
     public Round getLastRound() {
         if (this.rounds.size() == 0) {
             return null;
@@ -112,6 +149,12 @@ public class GameState implements Serializable {
         return this.rounds.get(this.rounds.size() - 1);
     }
 
+    /**
+     * Validates a game step.
+     * @param expected the expected game step.
+     * @param actual the actual game step.
+     * @throws IllegalStateException if the actual step is invalid.
+     */
     private void checkStep(GameStep expected, GameStep actual) {
         if (!expected.equals(actual)) {
             throw new IllegalStateException(String.format(
@@ -119,18 +162,38 @@ public class GameState implements Serializable {
         }
     }
 
+    /**
+     * Returns whether the game is over.
+     * @return <code>true</code> if the game has a winner; <code>false</code>
+     *         otherwise.
+     */
     public boolean isGameOver() {
         return this.getWinner() != null;
     }
 
+    /**
+     * Returns whether the given player has been registered for this game.
+     * @param player the player.
+     * @return <code>true</code> if the player has been registered to this game;
+     *         <code>false</code> otherwise.
+     */
     public boolean containsPlayer(Player player) {
         return this.players.contains(player);
     }
 
+    /**
+     * Returns all of rounds of this game.
+     * @return all of rounds of this game.
+     */
     public List<Round> getRounds() {
         return Collections.unmodifiableList(this.rounds);
     }
 
+    /**
+     * Returns the winner of this game.
+     * @return the winner of this game or <code>null</code> if there is no
+     *         winner.
+     */
     public Player getWinner() {
         Player winner = null;
         Round lastRound = this.getLastRound();
